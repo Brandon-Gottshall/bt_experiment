@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import "package:velocity_x/velocity_x.dart";
-import 'package:flutter_blue/flutter_blue.dart'
-
+import 'package:flutter_blue/flutter_blue.dart';
 
 void main() {
   runApp(VxState(
     store: MyStore(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -17,10 +16,13 @@ class MyStore extends VxStore {
 
 // Store Mutations
 class Increment extends VxMutation<MyStore> {
-  perform() => store.count++;
+  @override
+  perform() => store?.count++;
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Define when this widget should re render
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
     MyStore store = VxState.store;
 
     // Obtain an instance of FlutterBlue
+    // ignore: unused_local_variable
     FlutterBlue flutterBlue = FlutterBlue.instance;
 
     return MaterialApp(
